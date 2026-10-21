@@ -1,34 +1,41 @@
-huruf = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-angka = "0123456789"
+alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+digit = "0123456789"
 
-def periksa(teks):
-    state = "q0"
-    print("Input:", teks)
-    for c in teks:
-        lama = state
+def cek_nama(nama_input):
+    posisi = "q0"
+    print("Input:", nama_input)
 
-        if state == "q0":
-            if c in huruf or c == "_":
-                state = "q1"
+    for karakter in nama_input:
+        posisi_awal = posisi
+
+        if posisi == "q0":
+            if karakter in alphabet or karakter == "_":
+                posisi = "q1"
             else:
-                state = "DEAD"
-        elif state == "q1":
-            if c in huruf or c in angka or c == "_":
-                state = "q1"
+                posisi = "DEAD"
+
+        elif posisi == "q1":
+            if karakter in alphabet or karakter in digit or karakter == "_":
+                posisi = "q1"
             else:
-                state = "DEAD"
+                posisi = "DEAD"
+
         else:
-            state = "DEAD"
-        print(" ", lama, "--", c, "-->", state)
+            posisi = "DEAD"
 
-    if state == "q1":
+        print(" ", posisi_awal, "--", karakter, "-->", posisi)
+
+    if posisi == "q1":
         print("  Hasil: VALID")
     else:
         print("  Hasil: TIDAK VALID")
+        
     print()
-    
+
 while True:
-    s = input("Masukkan nama (kosongkan lalu Enter untuk keluar): ")
-    if s == "":
+    masukan = input("Masukkan nama (Enter untuk keluar): ")
+
+    if masukan == "":
         break
-    periksa(s)
+
+    cek_nama(masukan)
